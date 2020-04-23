@@ -1,10 +1,9 @@
+{-# LANGUAGE TemplateHaskell #-}
+
 module Main where
 
-import System.Environment as E
+import Aws.Lambda
 
-main :: IO ()
-main = do
-  args <- E.getArgs
-  putStrLn $ "args: " ++ show args
-  i <- getLine
-  putStrLn $ "stdin: " ++ i
+import Lib (handler)
+
+generateLambdaDispatcher
