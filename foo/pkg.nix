@@ -6,5 +6,5 @@ mkDerivation {
   isLibrary = false;
   isExecutable = true;
   executableHaskellDepends = [ base ];
-  license = stdenv.lib.licenses.unfree;
+  license = stdenv.lib.licenses.free;
 }

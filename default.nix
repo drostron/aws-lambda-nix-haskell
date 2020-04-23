@@ -9,8 +9,9 @@ pkg =
       process.env['PATH'] + ':' + process.env['LAMBDA_TASK_ROOT'];
     process.env['LD_LIBRARY_PATH'] = process.env['LAMBDA_TASK_ROOT'];
     exports.handler = function(input, context) {
-      var child = spawn("./exe", []);
-      child.stdin.write(JSON.stringify(input));
+      var inpt = JSON.stringify(input)
+      var child = spawn("./exe", [inpt]);
+      child.stdin.write(inpt);
       child.stdin.end();
       child.on('close', function (code) {
         if (code !== 0) { context.done(code, 'Error in process'); }
@@ -56,7 +57,7 @@ in
 { pkgs ? import <nixpkgs> {} }:
 
 let
-hs = pkgs.haskell.packages.ghc802;
+hs = pkgs.haskell.packages.ghc881;
 hsLib = pkgs.haskell.lib;
 foo = hsLib.overrideCabal (hs.callPackage ./foo/pkg.nix {}) (old: {
   isLibrary = false;
